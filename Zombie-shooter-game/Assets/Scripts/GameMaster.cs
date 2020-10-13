@@ -17,9 +17,7 @@ public class GameMaster : MonoBehaviour
     public bool SPAWN_ZOMBIES;
 
     [Header("UI objects")]
-    //public TextMeshProUGUI healthText;
-    //public TextMeshProUGUI weaponText;
-    //public TextMeshProUGUI ammoText;
+    [SerializeField] private Slider healthUI;
     
     private static GameMaster instance = null;
     public static GameMaster Instance
@@ -39,6 +37,8 @@ public class GameMaster : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+        SetHealthMax(Player.Instance.Health);
+        SetHealthSlider(Player.Instance.Health);
     }
     
     // Update is called once per frame
@@ -67,5 +67,15 @@ public class GameMaster : MonoBehaviour
         ZombiesInScene.Add(ZombieEnt);
         currentAmountOfZombies++;
         zombiesSpawned++;
+    }
+
+
+    public void SetHealthSlider(float value)
+    {
+        healthUI.value = value;
+    }
+    private void SetHealthMax(float value)
+    {
+        healthUI.maxValue = value;
     }
 }

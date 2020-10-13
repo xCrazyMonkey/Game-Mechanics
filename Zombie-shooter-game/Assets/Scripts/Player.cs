@@ -106,6 +106,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         Health -= dmg;
+        GameMaster.Instance.SetHealthSlider(Health);
         if (Health <= 0)
         {
             //gameOver
