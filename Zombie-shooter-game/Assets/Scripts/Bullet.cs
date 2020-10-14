@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject target;
+
     void Start()
     {
         Destroy(this.gameObject, Player.Instance.aliveTimer);
+        if(target.tag == "Enemy" && target != null)
+            transform.LookAt(target.transform);
     }
 
     // Update is called once per frame
@@ -23,10 +27,7 @@ public class Bullet : MonoBehaviour
             collision.gameObject.GetComponent<EnemyBehaviour>().TakeDamage(Player.Instance.bulletDamage);
             //Destroy(this.gameObject);
         }
-        if (collision.gameObject.tag == "Environment")
-        {
-
-        }
         Destroy(this.gameObject);
     }
+    
 }

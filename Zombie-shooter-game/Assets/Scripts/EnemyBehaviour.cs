@@ -33,7 +33,7 @@ public class EnemyBehaviour : MonoBehaviour
     //Multiple ability variables
 
     private NavMeshAgent agent;
-
+    public bool DEBUG_FREEZE;
     private void Awake()
     {
         GetZombievalues();
@@ -48,8 +48,12 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (lookAtPlayer) transform.LookAt(player.transform);
-        if(trackPlayer) agent.SetDestination(player.transform.position);
+        if (!DEBUG_FREEZE)
+        {
+            if (lookAtPlayer) transform.LookAt(player.transform);
+            if (trackPlayer) agent.SetDestination(player.transform.position);
+        }
+        
     }
 
     private IEnumerator SpawnDelay()
